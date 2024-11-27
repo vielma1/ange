@@ -10,8 +10,14 @@ import {Home} from './pages/Home'
 import {About} from './pages/About'
 import {Routes,Route} from 'react-router-dom'
 import { Signup } from './pages/Signup';
-
+import { Client, Databases } from 'appwrite';
 function App() {
+  const client = new Client();
+client.setProject('6746c3ae0018dc478d1a');
+client.setEndpoint("https://cloud.appwrite.io/v1")
+
+const database = new Databases ( client )
+
   return (
     <>
     <Header text="Wine" />
