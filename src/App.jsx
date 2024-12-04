@@ -4,25 +4,28 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
 import {Header} from './components/Header';
 import {Home} from './pages/Home'
 import {About} from './pages/About'
 import {Routes,Route} from 'react-router-dom'
 import { Signup } from './pages/Signup';
-import { Client, Databases } from 'appwrite';
+import { Client, Databases, Account, Storage } from 'appwrite';
+
+
 function App() {
   const client = new Client();
 client.setProject('6746c3ae0018dc478d1a');
 client.setEndpoint("https://cloud.appwrite.io/v1")
 
 const database = new Databases ( client )
+const storage = new Storage ( client )
+const account = new Account ( client )
 
   return (
     <>
     <Header text="Wine" />
     <Routes>
-      <Route path='/' element={ <Home/> } />
+      <Route path='/' element={ <Home db= {database} str={storage}/>}/>
       <Route path='/about' element={ <About/> } />
       <Route path='/register' element={ <Signup/> } />
     </Routes>
